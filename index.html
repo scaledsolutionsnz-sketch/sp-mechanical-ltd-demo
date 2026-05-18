@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SP Mechanical Ltd — Takaka, Golden Bay</title>
+  <meta name="description" content="SP Mechanical Ltd — your trusted local mechanic in Takaka, Golden Bay. WOFs, servicing, engine repairs, 4WD & farm equipment. Call Shane: 027 505 0201.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── CSS Variables ─────────────────────────────── */
+    :root {
+      --primary:   #0a1628;
+      --primary-mid: #0f2044;
+      --primary-light: #162d5a;
+      --accent:    #f59e0b;
+      --accent-dark: #d97706;
+      --text:      #f8fafc;
+      --muted:     rgba(248,250,252,0.62);
+      --muted-dark: rgba(248,250,252,0.35);
+      --surface:   rgba(255,255,255,0.04);
+      --card-bg:   #0f1f3d;
+      --border:    rgba(245,158,11,0.18);
+      --radius:    14px;
+      --radius-lg: 22px;
+      --transition: 0.32s cubic-bezier(.4,0,.2,1);
+      --shadow:    0 8px 32px rgba(0,0,0,0.35);
+      --shadow-accent: 0 4px 24px rgba(245,158,11,0.18);
+    }
+
+    /* ─── Reset & Base ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: var(--primary); }
+
+    /* ─── Utility ───────────────────────────────────── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+    .accent { color: var(--accent); }
+    .section-label {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(245,158,11,0.1);
+      border: 1px solid var(--border);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.1rem;
+    }
+    h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.15; }
+    h2 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; }
+    h3 { font-size: 1.2rem; font-weight: 700; }
+
+    /* ─── Scroll Animations ─────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.08s; }
+    .stagger-2 { transition-delay: 0.16s; }
+    .stagger-3 { transition-delay: 0.24s; }
+    .stagger-4 { transition-delay: 0.32s; }
+    .stagger-5 { transition-delay: 0.40s; }
+    .stagger-6 { transition-delay: 0.48s; }
+
+    /* ═══════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0;
+      z-index: 1000;
+      background: var(--primary);
+      border-bottom: 1px solid rgba(245,158,11,0.1);
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.85rem 2rem;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.22rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color var(--transition);
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--primary) !important;
+      font-weight: 700 !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.88rem !important;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+      box-shadow: var(--shadow-accent);
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: var(--accent-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(245,158,11,0.32) !important;
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.3rem;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: var(--primary);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    #hero:hover .hero-bg { transform: scale(1.0); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        130deg,
+        rgba(10,22,40,0.88) 0%,
+        rgba(10,22,40,0.6) 60%,
+        rgba(10,22,40,0.75) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 0 2rem;
+      margin-left: max(2rem, calc((100vw - 1180px)/2));
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 50px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    .hero-content h1 {
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.3rem;
+      color: var(--text);
+    }
+    .hero-content h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 0.7rem;
+      max-width: 520px;
+    }
+    .hero-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,158,11,0.85);
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-bottom: 2.4rem;
+    }
+    .hero-location svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--primary);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 6px 28px rgba(245,158,11,0.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(245,158,11,0.38);
+    }
+    .btn-outline {
+      border: 1.5px solid rgba(248,250,252,0.3);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .hero-stats {
+      position: absolute;
+      bottom: 3rem;
+      right: max(2rem, calc((100vw - 1180px)/2));
+      display: flex;
+      gap: 2rem;
+      z-index: 2;
+    }
+    .stat {
+      text-align: right;
+      border-right: 1px solid rgba(245,158,11,0.3);
+      padding-right: 1.5rem;
+    }
+    .stat:last-child { border-right: none; padding-right: 0; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted-dark);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       TRUST BAR
+    ═══════════════════════════════════════════════ */
+    .trust-bar {
+      background: var(--primary-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.3rem 0;
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .trust-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(245,158,11,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 17px; height: 17px; color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════ */
+    #about {
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 200px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 4px solid var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .about-badge-float {
+      position: absolute;
+      top: 1.5rem;
+      left: -1.5rem;
+      background: var(--accent);
+      color: var(--primary);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      padding: 1rem 1.3rem;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(245,158,11,0.3);
+      line-height: 1.2;
+    }
+    .about-badge-float .big { font-size: 1.6rem; display: block; }
+    .about-badge-float .small { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .about-text h2 { margin-bottom: 1.2rem; }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 1.02rem;
+    }
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .highlight-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════════ */
+    #services {
+      padding: 7rem 0;
+      background: var(--primary-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+    .services-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .services-header p {
+      color: var(--muted);
+      max-width: 540px;
+      margin: 1rem auto 0;
+      font-size: 1.05rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); border-color: rgba(245,158,11,0.2); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(245,158,11,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.3rem;
+      transition: background var(--transition);
+    }
+    .service-card:hover .service-icon { background: rgba(245,158,11,0.18); }
+    .service-icon svg { width: 26px; height: 26px; color: var(--accent); }
+    .service-card h3 { margin-bottom: 0.6rem; font-size: 1.1rem; }
+    .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ═══════════════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════════════ */
+    #gallery {
+      padding: 7rem 0;
+      position: relative;
+    }
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 300px;
+      gap: 1.2rem;
+    }
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ═══════════════════════════════════════════════
+       REVIEWS
+    ═══════════════════════════════════════════════ */
+    #reviews {
+      padding: 7rem 0;
+      background: var(--primary-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    #reviews::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .overall-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.65rem 1.6rem;
+      margin: 1rem auto 0;
+    }
+    .stars-row {
+      display: flex;
+      gap: 3px;
+    }
+    .stars-row svg { width: 18px; height: 18px; fill: var(--accent); }
+    .rating-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .rating-count { font-size: 0.82rem; color: var(--muted); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+    .review-quote {
+      font-size: 3rem;
+      font-family: 'Syne', sans-serif;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: -0.5rem;
+    }
+    .review-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .review-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.2rem;
+    }
+    .reviewer-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .reviewer-info { flex: 1; }
+    .reviewer-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; }
+    .reviewer-location { font-size: 0.78rem; color: var(--muted-dark); }
+    .review-stars { display: flex; gap: 2px; }
+    .review-stars svg { width: 13px; height: 13px; fill: var(--accent); }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT / BOOK
+    ═══════════════════════════════════════════════ */
+    #contact {
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.2;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 1.2rem; }
+    .contact-info p { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-detail-icon {
+      width: 46px; height: 46px;
+      background: rgba(245,158,11,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-detail-icon svg { width: 20px; height: 20px; color: var(--accent); }
+    .contact-detail-text .label { font-size: 0.75rem; color: var(--muted-dark); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-detail-text .value { font-weight: 600; font-size: 1rem; color: var(--text); }
+    .hours-box {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      margin-top: 2rem;
+    }
+    .hours-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--text); font-weight: 500; }
+    /* Form */
+    .form-wrap {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 2.8rem 2.5rem;
+    }
+    .form-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+    .form-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color var(--transition), background var(--transition);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted-dark); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: rgba(245,158,11,0.04);
+    }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--primary-mid); color: var(--text); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      background: var(--accent);
+      color: var(--primary);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      margin-top: 0.5rem;
+      box-shadow: 0 6px 24px rgba(245,158,11,0.25);
+    }
+    .form-submit:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(245,158,11,0.36);
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: var(--primary-mid);
+      border-top: 1px solid rgba(245,158,11,0.1);
+      padding: 4rem 0 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 280px;
+      line-height: 1.65;
+    }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p { color: var(--muted-dark); font-size: 0.82rem; }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { max-height: 380px; }
+      .about-img-main { height: 380px; }
+      .about-badge-float { display: none; }
+      .about-img-accent { width: 160px; height: 130px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-column: span 2; height: 260px; }
+      .gallery-item:not(:first-child) { height: 200px; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid .review-card:nth-child(3) { grid-column: span 2; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-stats { display: none; }
+      .hero-content { margin-left: 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .reviews-grid .review-card:nth-child(3) { grid-column: span 1; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-item { height: 220px; }
+      .gallery-item:first-child { grid-column: span 1; height: 260px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .trust-bar-inner { gap: 1.5rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner { padding: 0.75rem 1rem; }
+      .hero-content { padding: 0 1rem; }
+      .container { padding: 0 1rem; }
+      .form-wrap { padding: 2rem 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ MOBILE MENU ═══════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" id="mobileClose">✕</span>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#reviews" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Book a Service</a>
+</div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">SP <span>Mechanical</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact" class="nav-cta">Call Shane</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="openMobile()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Takaka, Golden Bay</div>
+    <h1>SP <em>Mechanical</em> Ltd</h1>
+    <p class="hero-sub">Your local mechanic in Golden Bay — honest, reliable, and ready when you need it most.</p>
+    <div class="hero-location">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      Takaka, Nelson-Tasman, New Zealand
+    </div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Book a Service
+      </a>
+      <a href="tel:027 505 0201" class="btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 010 1.18 2 2 0 011.98 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        027 505 0201
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Google Rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">WOF</div>
+      <div class="stat-label">Certified</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4WD</div>
+      <div class="stat-label">Specialist</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST BAR ═══════════════ -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        WOF Certified
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        Fast Turnaround
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        Locally Owned &amp; Operated
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        Honest &amp; Trustworthy
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        Serving Golden Bay
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap fade-up">
+        <img
+          class="about-img-main"
+          src="https://images.unsplash.com/photo-1600661653561-629509216228?w=900&q=80"
+          alt="Shane working at SP Mechanical workshop, Takaka"
+          loading="lazy"
+        >
+        <div class="about-badge-float">
+          <span class="big">Golden<br>Bay</span>
+          <span class="small">Trusted Mechanic</span>
+        </div>
+        <img
+          class="about-img-accent"
+          src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500&q=80"
+          alt="SP Mechanical engine work"
+          loading="lazy"
+        >
+      </div>
+      <div class="about-text fade-up stagger-2">
+        <div class="section-label">About Shane</div>
+        <h2>Reliable Mechanical<br>Work <span class="accent">You Can Trust</span></h2>
+        <p>SP Mechanical has been serving the Takaka and Golden Bay community with reliable, honest mechanical work for years. Shane's expertise covers everything from WOFs to full engine rebuilds — and in a remote area like Golden Bay, that kind of trusted, capable mechanic is worth its weight in gold.</p>
+        <p>When you bring your vehicle to SP Mechanical, you're dealing directly with Shane — no middlemen, no inflated charges, no surprises. Just straight talk and quality work done right the first time.</p>
+        <div class="about-highlights">
+          <div class="highlight-item"><div class="highlight-dot"></div>Fully equipped workshop in the heart of Takaka</div>
+          <div class="highlight-item"><div class="highlight-dot"></div>Cars, trucks, 4WDs, and farm machinery all welcome</div>
+          <div class="highlight-item"><div class="highlight-dot"></div>WOF inspections and certification on-site</div>
+          <div class="highlight-item"><div class="highlight-dot"></div>Honest quotes — no hidden fees</div>
+          <div class="highlight-item"><div class="highlight-dot"></div>Saturday appointments available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">What We Do</div>
+      <h2>Services <span class="accent">We Offer</span></h2>
+      <p>From a quick WOF to a full engine rebuild — if it's got an engine, Shane can sort it out.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-up stagger-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <h3>WOF &amp; Certification</h3>
+        <p>Warrant of Fitness inspections carried out on-site. We'll let you know exactly what's needed and get you back on the road safely — no unnecessary extras.</p>
+      </div>
+
+      <div class="service-card fade-up stagger-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <h3>General Servicing</h3>
+        <p>Regular servicing keeps your vehicle running reliably. Oil changes, filters, brakes, tyres, and full mechanical checks — all done properly, every time.</p>
+      </div>
+
+      <div class="service-card fade-up stagger-3">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v3M9 15h6"/></svg>
+        </div>
+        <h3>Engine Repairs</h3>
+        <p>From head gaskets to full rebuilds, Shane handles complex engine work with the kind of care and precision that only comes from years of hands-on experience.</p>
+      </div>
+
+      <div class="service-card fade-up stagger-4">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Electrical Diagnostics</h3>
+        <p>Modern vehicles need modern diagnostic tools. We have the equipment and the know-how to track down electrical faults quickly and get things sorted.</p>
+      </div>
+
+      <div class="service-card fade-up stagger-5">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <h3>4WD &amp; Off-Road</h3>
+        <p>Golden Bay's roads and landscapes demand capable 4WDs. Whether it's a lift kit, diff service, or general 4x4 maintenance — Shane knows these vehicles inside out.</p>
+      </div>
+
+      <div class="service-card fade-up stagger-6">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Farm Equipment</h3>
+        <p>Rural machinery keeps Golden Bay moving. SP Mechanical services tractors and farm equipment, helping local farmers stay productive through every season.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-header">
+      <div>
+        <div class="section-label">Our Work</div>
+        <h2>The Workshop <span class="accent">in Action</span></h2>
+      </div>
+      <a href="#contact" class="btn-outline">Book Your Vehicle →</a>
+    </div>
+    <div class="gallery-grid fade-up">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=80" alt="Vehicle in the SP Mechanical workshop" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Workshop Bay</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" alt="Engine work at SP Mechanical Takaka" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Engine Rebuild</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600&q=80" alt="4WD servicing at SP Mechanical" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">4WD Service</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="section-label">Google Reviews</div>
+      <h2>What Golden Bay <span class="accent">Says About Shane</span></h2>
+      <div class="overall-rating">
+        <div class="stars-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span class="rating-text">4.9</span>
+        <span class="rating-count">Google Reviews</span>
+      </div>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="review-card fade-up stagger-1">
+        <div class="review-quote">"</div>
+        <p class="review-text">Shane sorted out my old Hilux in no time — a job two other workshops had given up on. Brilliant mechanic, and he was upfront about the cost the whole way through. Couldn't ask for more out here in Golden Bay.</p>
+        <div class="review-footer">
+          <div class="reviewer-avatar">TH</div>
+          <div class="reviewer-info">
+            <div class="reviewer-name">Tim Hargreaves</div>
+            <div class="reviewer-location">Takaka, Golden Bay</div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-up stagger-2">
+        <div class="review-quote">"</div>
+        <p class="review-text">As a farmer in the bay, having a reliable mechanic close by is everything. Shane's kept our tractor and ute running for years. He's the real deal — knowledgeable, honest, and always gets the job done without fuss.</p>
+        <div class="review-footer">
+          <div class="reviewer-avatar">BR</div>
+          <div class="reviewer-info">
+            <div class="reviewer-name">Bev Rutherford</div>
+            <div class="reviewer-location">Pohara, Golden Bay</div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-up stagger-3">
+        <div class="review-quote">"</div>
+        <p class="review-text">My Subaru needed a lot of work before its WOF and Shane had it done faster than I expected. He rang me with updates and the final bill was exactly what he quoted. That kind of honesty is rare — Shane's the only mechanic I'll use.</p>
+        <div class="review-footer">
+          <div class="reviewer-avatar">ML</div>
+          <div class="reviewer-info">
+            <div class="reviewer-name">Mike Langford</div>
+            <div class="reviewer-location">Collingwood, Golden Bay</div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <div class="section-label">Get in Touch</div>
+        <h2>Book a Service<br><span class="accent">with Shane</span></h2>
+        <p>Fill in the form and Shane will get back to you promptly. Or if it's urgent — give him a call directly. Golden Bay's most trusted mechanic is ready to help.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 010 1.18 2 2 0 011.98 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <div class="label">Phone</div>
+              <div class="value"><a href="tel:0275050201" style="color:inherit;">027 505 0201</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <div class="label">Email</div>
+              <div class="value"><a href="mailto:sp.Mechanical@outlook.co.nz" style="color:inherit;">sp.Mechanical@outlook.co.nz</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <div class="label">Location</div>
+              <div class="value">Takaka, Golden Bay, NZ</div>
+            </div>
+          </div>
+        </div>
+        <div class="hours-box">
+          <div class="hours-title">Opening Hours</div>
+          <div class="hours-row"><span class="day">Monday – Friday</span><span>8:00am – 5:00pm</span></div>
+          <div class="hours-row"><span class="day">Saturday</span><span>By Appointment</span></div>
+          <div class="hours-row"><span class="day">Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+
+      <div class="form-wrap fade-up stagger-2">
+        <div class="form-title">Book a Service</div>
+        <div class="form-subtitle">We'll get back to you as soon as possible.</div>
+        <form action="https://api.staticforms.xyz/submit" method="post">
+          <input type="hidden" name="apiKey" value="sf_768da8d33927e7f4f241d0a6">
+          <input type="hidden" name="subject" value="New Booking — SP Mechanical Ltd">
+          <div class="form-row">
+            <div class="form-group"><input type="text" name="firstName" placeholder="First Name" required></div>
+            <div class="form-group"><input type="text" name="lastName" placeholder="Last Name" required></div>
+          </div>
+          <div class="form-group"><input type="email" name="email" placeholder="Email Address" required></div>
+          <div class="form-group"><input type="tel" name="phone" placeholder="Phone Number"></div>
+          <div class="form-group">
+            <select name="service" required>
+              <option value="" disabled selected>Service Required</option>
+              <option>WOF Inspection</option>
+              <option>General Service</option>
+              <option>Engine Repair</option>
+              <option>Electrical / Diagnostics</option>
+              <option>4WD / Off-Road</option>
+              <option>Farm Equipment</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Describe the issue or your preferred time..."></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="form-submit">Book with Shane →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand fade-up">
+        <div class="brand-name">SP <span class="accent">Mechanical</span> Ltd</div>
+        <p>Golden Bay's trusted local mechanic. Serving Takaka and the surrounding Golden Bay community with honest, reliable mechanical work.</p>
+      </div>
+      <div class="footer-col fade-up stagger-2">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">WOF &amp; Certification</a></li>
+          <li><a href="#services">General Servicing</a></li>
+          <li><a href="#services">Engine Repairs</a></li>
+          <li><a href="#services">Electrical Diagnostics</a></li>
+          <li><a href="#services">4WD &amp; Off-Road</a></li>
+          <li><a href="#services">Farm Equipment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col fade-up stagger-3">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:0275050201">027 505 0201</a></li>
+          <li><a href="mailto:sp.Mechanical@outlook.co.nz">sp.Mechanical@outlook.co.nz</a></li>
+          <li><a href="#contact">Takaka, Golden Bay, NZ</a></li>
+          <li><a href="#contact">Mon–Fri: 8am–5pm</a></li>
+          <li><a href="#contact">Sat: By Appointment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SP Mechanical Ltd. All rights reserved. Takaka, Golden Bay, New Zealand.</p>
+      <p>Built by <a href="https://scaleds.co.nz" style="color:var(--accent);">Scaled Solutions</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('mobileClose').addEventListener('click', closeMobile);
+
+  // IntersectionObserver fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
