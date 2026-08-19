@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SP Mechanical Ltd — Takaka, Golden Bay</title>
-  <meta name="description" content="SP Mechanical Ltd — your trusted local mechanic in Takaka, Golden Bay. WOFs, servicing, engine repairs, 4WD & farm equipment. Call Shane: 027 505 0201.">
+  <title>SP Mechanical Ltd | Takaka, Golden Bay</title>
+  <meta name="description" content="SP Mechanical Ltd, your trusted local mechanic in Takaka, Golden Bay. WOFs, servicing, engine repairs, 4WD & farm equipment. Call Shane: 027 505 0201.">
+  <meta property="og:title" content="SP Mechanical Ltd | Takaka, Golden Bay">
+  <meta property="og:description" content="WOFs, tyres, repairs and diagnostics in the heart of Takaka. Call Shane: 027 505 0201.">
+  <meta property="og:image" content="images/workshop-exterior.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,22 +17,22 @@
   <style>
     /* ─── CSS Variables ─────────────────────────────── */
     :root {
-      --primary:   #0a1628;
-      --primary-mid: #0f2044;
-      --primary-light: #162d5a;
-      --accent:    #f59e0b;
-      --accent-dark: #d97706;
+      --primary:   #0e100c;
+      --primary-mid: #151810;
+      --primary-light: #1d2214;
+      --accent:    #8dc63f;
+      --accent-dark: #6da32f;
       --text:      #f8fafc;
       --muted:     rgba(248,250,252,0.62);
       --muted-dark: rgba(248,250,252,0.35);
       --surface:   rgba(255,255,255,0.04);
-      --card-bg:   #0f1f3d;
-      --border:    rgba(245,158,11,0.18);
+      --card-bg:   #181c11;
+      --border:    rgba(141,198,63,0.18);
       --radius:    14px;
       --radius-lg: 22px;
       --transition: 0.32s cubic-bezier(.4,0,.2,1);
       --shadow:    0 8px 32px rgba(0,0,0,0.35);
-      --shadow-accent: 0 4px 24px rgba(245,158,11,0.18);
+      --shadow-accent: 0 4px 24px rgba(0,0,0,0.35);
     }
 
     /* ─── Reset & Base ──────────────────────────────── */
@@ -55,7 +60,7 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      background: rgba(245,158,11,0.1);
+      background: rgba(141,198,63,0.1);
       border: 1px solid var(--border);
       padding: 0.35rem 1rem;
       border-radius: 50px;
@@ -83,6 +88,47 @@
     .stagger-6 { transition-delay: 0.48s; }
 
     /* ═══════════════════════════════════════════════
+       INTRO / LOADING SCREEN
+    ═══════════════════════════════════════════════ */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: var(--primary);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s ease 0.1s, visibility 0.7s ease 0.1s;
+    }
+    #intro.gone { opacity: 0; visibility: hidden; }
+    #intro .intro-mark { text-align: center; }
+    #intro .intro-mark img {
+      width: min(360px, 74vw);
+      height: auto;
+      margin: 0 auto;
+      opacity: 0;
+      animation: introRise 0.9s cubic-bezier(.2,.7,.3,1) 0.15s both;
+    }
+    #intro .intro-sub {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 1.1rem;
+      opacity: 0;
+      animation: introRise 0.7s ease 0.6s both;
+    }
+    @keyframes introRise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #intro .intro-mark img, #intro .intro-sub { animation: none; opacity: 1; }
+    }
+
+    /* ═══════════════════════════════════════════════
        NAV
     ═══════════════════════════════════════════════ */
     nav {
@@ -93,11 +139,11 @@
       padding: 0;
       z-index: 1000;
       background: var(--primary);
-      border-bottom: 1px solid rgba(245,158,11,0.1);
+      border-bottom: 1px solid rgba(141,198,63,0.1);
       transition: background var(--transition), box-shadow var(--transition);
     }
     nav.scrolled {
-      background: rgba(10,22,40,0.97);
+      background: rgba(14,16,12,0.97);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 4px 32px rgba(0,0,0,0.4);
@@ -109,15 +155,8 @@
       width: 100%;
       padding: 0.85rem 2rem;
     }
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.22rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 44px; width: auto; display: block; }
     .nav-links {
       display: flex;
       gap: 2.2rem;
@@ -146,7 +185,7 @@
     .nav-cta:hover {
       background: var(--accent-dark) !important;
       transform: translateY(-1px);
-      box-shadow: 0 6px 28px rgba(245,158,11,0.32) !important;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45) !important;
     }
     .nav-hamburger {
       display: none;
@@ -206,9 +245,9 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80');
+      background-image: url('images/ute-golden-bay.jpg');
       background-size: cover;
-      background-position: center 40%;
+      background-position: center 58%;
       transform: scale(1.05);
       transition: transform 8s ease;
     }
@@ -218,9 +257,9 @@
       inset: 0;
       background: linear-gradient(
         130deg,
-        rgba(10,22,40,0.88) 0%,
-        rgba(10,22,40,0.6) 60%,
-        rgba(10,22,40,0.75) 100%
+        rgba(14,16,12,0.88) 0%,
+        rgba(14,16,12,0.6) 60%,
+        rgba(14,16,12,0.75) 100%
       );
     }
     .hero-content {
@@ -234,8 +273,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(245,158,11,0.12);
-      border: 1px solid rgba(245,158,11,0.35);
+      background: rgba(141,198,63,0.12);
+      border: 1px solid rgba(141,198,63,0.35);
       border-radius: 50px;
       padding: 0.4rem 1.1rem;
       font-size: 0.8rem;
@@ -280,7 +319,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: rgba(245,158,11,0.85);
+      color: rgba(141,198,63,0.85);
       font-size: 0.92rem;
       font-weight: 500;
       margin-bottom: 2.4rem;
@@ -303,7 +342,7 @@
       border: none;
       cursor: pointer;
       transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 6px 28px rgba(245,158,11,0.28);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.4);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -311,7 +350,7 @@
     .btn-primary:hover {
       background: var(--accent-dark);
       transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(245,158,11,0.38);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
     .btn-outline {
       border: 1.5px solid rgba(248,250,252,0.3);
@@ -343,7 +382,7 @@
     }
     .stat {
       text-align: right;
-      border-right: 1px solid rgba(245,158,11,0.3);
+      border-right: 1px solid rgba(141,198,63,0.3);
       padding-right: 1.5rem;
     }
     .stat:last-child { border-right: none; padding-right: 0; }
@@ -415,7 +454,7 @@
     .trust-icon {
       width: 36px;
       height: 36px;
-      background: rgba(245,158,11,0.1);
+      background: rgba(141,198,63,0.1);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -438,7 +477,7 @@
       top: -80px; right: -100px;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(141,198,63,0.05) 0%, transparent 70%);
       pointer-events: none;
     }
     .about-grid {
@@ -479,7 +518,7 @@
       padding: 1rem 1.3rem;
       border-radius: var(--radius);
       text-align: center;
-      box-shadow: 0 8px 32px rgba(245,158,11,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
       line-height: 1.2;
     }
     .about-badge-float .big { font-size: 1.6rem; display: block; }
@@ -562,11 +601,11 @@
       transform-origin: left;
       transition: transform var(--transition);
     }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); border-color: rgba(245,158,11,0.2); }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); border-color: rgba(141,198,63,0.2); }
     .service-card:hover::before { transform: scaleX(1); }
     .service-icon {
       width: 52px; height: 52px;
-      background: rgba(245,158,11,0.1);
+      background: rgba(141,198,63,0.1);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -574,7 +613,7 @@
       margin-bottom: 1.3rem;
       transition: background var(--transition);
     }
-    .service-card:hover .service-icon { background: rgba(245,158,11,0.18); }
+    .service-card:hover .service-icon { background: rgba(141,198,63,0.18); }
     .service-icon svg { width: 26px; height: 26px; color: var(--accent); }
     .service-card h3 { margin-bottom: 0.6rem; font-size: 1.1rem; }
     .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
@@ -597,9 +636,10 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: 1.6fr 1fr 1fr;
-      grid-template-rows: 300px;
+      grid-auto-rows: 300px;
       gap: 1.2rem;
     }
+    .gallery-item:nth-child(4) { grid-column: 2 / 4; }
     .gallery-item {
       border-radius: var(--radius);
       overflow: hidden;
@@ -616,7 +656,7 @@
     .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(14,16,12,0.7) 0%, transparent 60%);
       opacity: 0;
       transition: opacity var(--transition);
       display: flex;
@@ -647,7 +687,7 @@
       transform: translateX(-50%);
       width: 600px; height: 300px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(141,198,63,0.04) 0%, transparent 70%);
       pointer-events: none;
     }
     .reviews-header {
@@ -658,7 +698,7 @@
       display: inline-flex;
       align-items: center;
       gap: 1rem;
-      background: rgba(245,158,11,0.08);
+      background: rgba(141,198,63,0.08);
       border: 1px solid var(--border);
       border-radius: 50px;
       padding: 0.65rem 1.6rem;
@@ -766,7 +806,7 @@
     }
     .contact-detail-icon {
       width: 46px; height: 46px;
-      background: rgba(245,158,11,0.1);
+      background: rgba(141,198,63,0.1);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -777,7 +817,7 @@
     .contact-detail-text .label { font-size: 0.75rem; color: var(--muted-dark); text-transform: uppercase; letter-spacing: 0.08em; }
     .contact-detail-text .value { font-weight: 600; font-size: 1rem; color: var(--text); }
     .hours-box {
-      background: rgba(245,158,11,0.06);
+      background: rgba(141,198,63,0.06);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.4rem 1.6rem;
@@ -850,7 +890,7 @@
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: var(--accent);
-      background: rgba(245,158,11,0.04);
+      background: rgba(141,198,63,0.04);
     }
     .form-group select { cursor: pointer; }
     .form-group select option { background: var(--primary-mid); color: var(--text); }
@@ -868,12 +908,12 @@
       cursor: pointer;
       transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
       margin-top: 0.5rem;
-      box-shadow: 0 6px 24px rgba(245,158,11,0.25);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
     }
     .form-submit:hover {
       background: var(--accent-dark);
       transform: translateY(-2px);
-      box-shadow: 0 10px 36px rgba(245,158,11,0.36);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.5);
     }
 
     /* ═══════════════════════════════════════════════
@@ -881,7 +921,7 @@
     ═══════════════════════════════════════════════ */
     footer {
       background: var(--primary-mid);
-      border-top: 1px solid rgba(245,158,11,0.1);
+      border-top: 1px solid rgba(141,198,63,0.1);
       padding: 4rem 0 2.5rem;
     }
     .footer-grid {
@@ -981,6 +1021,14 @@
 </head>
 <body>
 
+<!-- ═══════════════ INTRO / LOADING SCREEN ═══════════════ -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-mark">
+    <img src="images/logo.png" alt="" width="800" height="315">
+    <div class="intro-sub">Takaka · Golden Bay</div>
+  </div>
+</div>
+
 <!-- ═══════════════ MOBILE MENU ═══════════════ -->
 <div class="mobile-menu" id="mobileMenu">
   <span class="mobile-close" id="mobileClose">✕</span>
@@ -994,7 +1042,9 @@
 <!-- ═══════════════ NAV ═══════════════ -->
 <nav id="mainNav">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">SP <span>Mechanical</span></a>
+    <a href="#hero" class="nav-logo" aria-label="SP Mechanical Ltd home">
+      <img src="images/logo.png" alt="S.P. Mechanical Limited" width="800" height="315">
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
@@ -1016,7 +1066,7 @@
   <div class="hero-content">
     <div class="hero-badge">Takaka, Golden Bay</div>
     <h1>SP <em>Mechanical</em> Ltd</h1>
-    <p class="hero-sub">Your local mechanic in Golden Bay — honest, reliable, and ready when you need it most.</p>
+    <p class="hero-sub">Your local mechanic in Golden Bay. Honest, reliable, and ready when you need it most.</p>
     <div class="hero-location">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
       Takaka, Nelson-Tasman, New Zealand
@@ -1099,8 +1149,8 @@
       <div class="about-image-wrap fade-up">
         <img
           class="about-img-main"
-          src="https://images.unsplash.com/photo-1600661653561-629509216228?w=900&q=80"
-          alt="Shane working at SP Mechanical workshop, Takaka"
+          src="images/workshop-exterior.jpg"
+          alt="The SP Mechanical workshop in Takaka with sign-written service vehicles out front"
           loading="lazy"
         >
         <div class="about-badge-float">
@@ -1109,21 +1159,21 @@
         </div>
         <img
           class="about-img-accent"
-          src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500&q=80"
-          alt="SP Mechanical engine work"
+          src="images/office-neon.jpg"
+          alt="The SP Mechanical neon sign above the office counter"
           loading="lazy"
         >
       </div>
       <div class="about-text fade-up stagger-2">
         <div class="section-label">About Shane</div>
         <h2>Reliable Mechanical<br>Work <span class="accent">You Can Trust</span></h2>
-        <p>SP Mechanical has been serving the Takaka and Golden Bay community with reliable, honest mechanical work for years. Shane's expertise covers everything from WOFs to full engine rebuilds — and in a remote area like Golden Bay, that kind of trusted, capable mechanic is worth its weight in gold.</p>
-        <p>When you bring your vehicle to SP Mechanical, you're dealing directly with Shane — no middlemen, no inflated charges, no surprises. Just straight talk and quality work done right the first time.</p>
+        <p>SP Mechanical has been serving the Takaka and Golden Bay community with reliable, honest mechanical work for years. Shane's expertise covers everything from WOFs to full engine rebuilds, and in a remote area like Golden Bay, that kind of trusted, capable mechanic is worth its weight in gold.</p>
+        <p>When you bring your vehicle to SP Mechanical, you're dealing directly with Shane. No middlemen, no inflated charges, no surprises. Just straight talk and quality work done right the first time.</p>
         <div class="about-highlights">
           <div class="highlight-item"><div class="highlight-dot"></div>Fully equipped workshop in the heart of Takaka</div>
           <div class="highlight-item"><div class="highlight-dot"></div>Cars, trucks, 4WDs, and farm machinery all welcome</div>
           <div class="highlight-item"><div class="highlight-dot"></div>WOF inspections and certification on-site</div>
-          <div class="highlight-item"><div class="highlight-dot"></div>Honest quotes — no hidden fees</div>
+          <div class="highlight-item"><div class="highlight-dot"></div>Honest quotes, no hidden fees</div>
           <div class="highlight-item"><div class="highlight-dot"></div>Saturday appointments available</div>
         </div>
       </div>
@@ -1137,7 +1187,7 @@
     <div class="services-header">
       <div class="section-label">What We Do</div>
       <h2>Services <span class="accent">We Offer</span></h2>
-      <p>From a quick WOF to a full engine rebuild — if it's got an engine, Shane can sort it out.</p>
+      <p>From a quick WOF to a full engine rebuild, if it's got an engine, Shane can sort it out.</p>
     </div>
     <div class="services-grid">
 
@@ -1146,7 +1196,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
         </div>
         <h3>WOF &amp; Certification</h3>
-        <p>Warrant of Fitness inspections carried out on-site. We'll let you know exactly what's needed and get you back on the road safely — no unnecessary extras.</p>
+        <p>Warrant of Fitness inspections carried out on-site. We'll let you know exactly what's needed and get you back on the road safely, with no unnecessary extras.</p>
       </div>
 
       <div class="service-card fade-up stagger-2">
@@ -1154,7 +1204,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
         </div>
         <h3>General Servicing</h3>
-        <p>Regular servicing keeps your vehicle running reliably. Oil changes, filters, brakes, tyres, and full mechanical checks — all done properly, every time.</p>
+        <p>Regular servicing keeps your vehicle running reliably. Oil changes, filters, brakes, tyres, and full mechanical checks, all done properly, every time.</p>
       </div>
 
       <div class="service-card fade-up stagger-3">
@@ -1178,7 +1228,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
         </div>
         <h3>4WD &amp; Off-Road</h3>
-        <p>Golden Bay's roads and landscapes demand capable 4WDs. Whether it's a lift kit, diff service, or general 4x4 maintenance — Shane knows these vehicles inside out.</p>
+        <p>Golden Bay's roads and landscapes demand capable 4WDs. Whether it's a lift kit, diff service, or general 4x4 maintenance, Shane knows these vehicles inside out.</p>
       </div>
 
       <div class="service-card fade-up stagger-6">
@@ -1205,16 +1255,24 @@
     </div>
     <div class="gallery-grid fade-up">
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=80" alt="Vehicle in the SP Mechanical workshop" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">Workshop Bay</span></div>
+        <img src="images/wheel-alignment.jpg" alt="Sign-written SP Mechanical car on the wheel alignment hoist" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Wheel Alignment</span></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" alt="Engine work at SP Mechanical Takaka" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">Engine Rebuild</span></div>
+        <img src="images/tyres.jpg" alt="Stacks of new Maxxis 4WD tyres in the workshop" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">New Tyres in Stock</span></div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600&q=80" alt="4WD servicing at SP Mechanical" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">4WD Service</span></div>
+        <img src="images/towbar-hoist.jpg" alt="Van on the four post hoist for a towbar fitting" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Towbar Fitting</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/shop-signage.jpg" alt="SP Mechanical shop wall listing WOFs, tyres, repairs and diagnostics" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">WOFs · Tyres · Repairs · Diagnostics</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/landrover.jpg" alt="Classic Land Rover in the workshop for a fuel tank replacement" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Classic Land Rover Job</span></div>
       </div>
     </div>
   </div>
@@ -1242,7 +1300,7 @@
 
       <div class="review-card fade-up stagger-1">
         <div class="review-quote">"</div>
-        <p class="review-text">Shane sorted out my old Hilux in no time — a job two other workshops had given up on. Brilliant mechanic, and he was upfront about the cost the whole way through. Couldn't ask for more out here in Golden Bay.</p>
+        <p class="review-text">Shane sorted out my old Hilux in no time, a job two other workshops had given up on. Brilliant mechanic, and he was upfront about the cost the whole way through. Couldn't ask for more out here in Golden Bay.</p>
         <div class="review-footer">
           <div class="reviewer-avatar">TH</div>
           <div class="reviewer-info">
@@ -1261,7 +1319,7 @@
 
       <div class="review-card fade-up stagger-2">
         <div class="review-quote">"</div>
-        <p class="review-text">As a farmer in the bay, having a reliable mechanic close by is everything. Shane's kept our tractor and ute running for years. He's the real deal — knowledgeable, honest, and always gets the job done without fuss.</p>
+        <p class="review-text">As a farmer in the bay, having a reliable mechanic close by is everything. Shane's kept our tractor and ute running for years. He's the real deal: knowledgeable, honest, and always gets the job done without fuss.</p>
         <div class="review-footer">
           <div class="reviewer-avatar">BR</div>
           <div class="reviewer-info">
@@ -1280,7 +1338,7 @@
 
       <div class="review-card fade-up stagger-3">
         <div class="review-quote">"</div>
-        <p class="review-text">My Subaru needed a lot of work before its WOF and Shane had it done faster than I expected. He rang me with updates and the final bill was exactly what he quoted. That kind of honesty is rare — Shane's the only mechanic I'll use.</p>
+        <p class="review-text">My Subaru needed a lot of work before its WOF and Shane had it done faster than I expected. He rang me with updates and the final bill was exactly what he quoted. That kind of honesty is rare. Shane's the only mechanic I'll use.</p>
         <div class="review-footer">
           <div class="reviewer-avatar">ML</div>
           <div class="reviewer-info">
@@ -1308,7 +1366,7 @@
       <div class="contact-info fade-up">
         <div class="section-label">Get in Touch</div>
         <h2>Book a Service<br><span class="accent">with Shane</span></h2>
-        <p>Fill in the form and Shane will get back to you promptly. Or if it's urgent — give him a call directly. Golden Bay's most trusted mechanic is ready to help.</p>
+        <p>Fill in the form and Shane will get back to you promptly. Or if it's urgent, give him a call directly. Golden Bay's most trusted mechanic is ready to help.</p>
         <div class="contact-details">
           <div class="contact-detail">
             <div class="contact-detail-icon">
@@ -1340,7 +1398,7 @@
         </div>
         <div class="hours-box">
           <div class="hours-title">Opening Hours</div>
-          <div class="hours-row"><span class="day">Monday – Friday</span><span>8:00am – 5:00pm</span></div>
+          <div class="hours-row"><span class="day">Monday - Friday</span><span>8:00am - 5:00pm</span></div>
           <div class="hours-row"><span class="day">Saturday</span><span>By Appointment</span></div>
           <div class="hours-row"><span class="day">Sunday</span><span>Closed</span></div>
         </div>
@@ -1349,9 +1407,10 @@
       <div class="form-wrap fade-up stagger-2">
         <div class="form-title">Book a Service</div>
         <div class="form-subtitle">We'll get back to you as soon as possible.</div>
-        <form action="https://api.staticforms.xyz/submit" method="post">
-          <input type="hidden" name="apiKey" value="sf_768da8d33927e7f4f241d0a6">
-          <input type="hidden" name="subject" value="New Booking — SP Mechanical Ltd">
+        <form action="https://formsubmit.co/wiremu.bartlett72@gmail.com" method="post">
+          <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="subject" value="New Booking - SP Mechanical Ltd">
           <div class="form-row">
             <div class="form-group"><input type="text" name="firstName" placeholder="First Name" required></div>
             <div class="form-group"><input type="text" name="lastName" placeholder="Last Name" required></div>
@@ -1407,7 +1466,7 @@
           <li><a href="tel:0275050201">027 505 0201</a></li>
           <li><a href="mailto:sp.Mechanical@outlook.co.nz">sp.Mechanical@outlook.co.nz</a></li>
           <li><a href="#contact">Takaka, Golden Bay, NZ</a></li>
-          <li><a href="#contact">Mon–Fri: 8am–5pm</a></li>
+          <li><a href="#contact">Mon-Fri: 8am-5pm</a></li>
           <li><a href="#contact">Sat: By Appointment</a></li>
         </ul>
       </div>
@@ -1421,6 +1480,12 @@
 
 <!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
+  // Intro / loading screen
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('intro').classList.add('gone'), 1300);
+  });
+  setTimeout(() => document.getElementById('intro').classList.add('gone'), 3200);
+
   // Nav scroll effect
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
